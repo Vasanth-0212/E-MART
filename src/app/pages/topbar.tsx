@@ -27,7 +27,7 @@ const Topbar = () => {
                             )}
                             <div className="ml-4 mr-1 rounded-full p-2 flex space-x-2">
                                 <Heart />
-                                <h1>WishList</h1>
+                                <h1 className='font-semibold'>W I S H L I S T</h1>
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@ const Topbar = () => {
                             )}
                             <div className="ml-4 mr-1 rounded-full p-2 flex space-x-2">
                                 <ShoppingCart />
-                                <h1>Cart</h1>
+                                <h1 className='font-semibold'>C A R T</h1>
                             </div>
                         </div>
                     </div>
