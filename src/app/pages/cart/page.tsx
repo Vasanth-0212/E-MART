@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import useStore from "../../../../utils/useStore";
+import { House , Heart } from "lucide-react";
+
 
 interface StoreState {
     wishlist: any[];
@@ -19,11 +21,18 @@ const Cart = () => {
 
     return (
         <div className="flex flex-col items-center h-full space-y-10 bg-gray-300">
-            <div className="flex h-20 w-full bg-white items-center justify-center shadow-md">
-                <Link href="/">
-                    <button className="absolute top-2 left-2 m-4 h-8 w-32 rounded-md text-white bg-black">Back to home</button>
-                </Link>
-                <h1 className="text-5xl pb-3 font-serif text-red-500 font-extrabold mt-5">Y O U R <span className="ml-3">C A R T</span></h1>
+            <div className="flex h-20 w-full bg-white items-center justify-between p-5 shadow-md">
+                <h1 className="text-2xl pb-3 font-serif text-black font-extrabold mt-5">Y O U R <span className="ml-3">C A R T</span></h1>
+                <div className="flex space-x-5 pr-5">
+                    <Link href="/" className="flex items-center space-x-1 text-black">
+                        <House/>
+                        <h1 className="font-semibold">HOME</h1>
+                    </Link>
+                    <Link href="/pages/wishlist" className="flex items-center space-x-1 text-black">
+                        <Heart/>
+                        <h1 className="font-semibold">WISHLIST</h1>
+                    </Link>
+                </div>
             </div>
 
             {cartItems.length > 0 && (

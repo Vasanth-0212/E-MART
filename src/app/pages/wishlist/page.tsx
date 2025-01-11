@@ -2,9 +2,9 @@
 import Image from "next/image";
 import useStore from "../../../../utils/useStore";
 import Link from "next/link";
-import { use, useEffect } from "react";
-import { useToast } from "@/hooks/use-toast"
-
+import { useEffect } from "react";
+import { toast } from "sonner"
+import { House, ShoppingCart } from "lucide-react";
 
 interface StoreState {
     wishlist: any[];
@@ -22,17 +22,22 @@ const WishList = () => {
     const cart = useStore((state: StoreState) => state.cart);
     const setCart = useStore((state: StoreState) => state.addCart);
 
-    useEffect(() => {console.log(cart)},[setCart])
-
-    const { toast } = useToast();
+    useEffect(() => { console.log(cart) }, [setCart])
 
     return (
-        <div className="flex flex-col items-center h-full space-y-10 bg-gray-300">
-            <div className="flex h-20 w-full bg-white items-center justify-center shadow-md">
-                <Link href="/">
-                    <button className="absolute top-2 left-2 m-4 h-8 w-32 rounded-md text-white bg-black">Back to home</button>
-                </Link>
-                <h1 className="text-5xl pb-3 font-serif text-red-500 font-extrabold mt-5">Y O U R <span className="ml-3">W I S H L I S T</span></h1>
+        <div className="flex flex-col items-center space-y-10">
+            <div className="flex h-20 w-full bg-white items-center justify-between p-5 shadow-md">
+                <h1 className="text-2xl pb-3 font-serif text-black font-extrabold mt-5">Y O U R <span className="ml-3">W I S H L I S T</span></h1>
+                <div className="flex space-x-5 pr-5">
+                    <Link href="/" className="flex items-center space-x-1 text-black">
+                        <House/>
+                        <h1 className="font-semibold">HOME</h1>
+                    </Link>
+                    <Link href="/pages/cart" className="flex items-center space-x-1 text-black-500">
+                        <ShoppingCart/>
+                        <h1 className="font-semibold">CART</h1>
+                    </Link>
+                </div>
             </div>
             <div>
                 <div className="grid grid-cols-4 gap-4 p-5">
@@ -43,10 +48,24 @@ const WishList = () => {
                             </div>
                             <div className="flex space-x-2">
                                 <button className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-                                    onClick={() => setCart(item)}
+                                    onClick={() => {
+                                        const exists = cart.find((alreadyAddedItem: any) => alreadyAddedItem.id === item.id);
+                                        if (exists) {
+                                            toast.error(`${item.title} \n is already in your cart.`)
+                                            return;
+                                        }
+                                        else {
+                                            setCart(item);
+                                            setWishlist(item);
+                                            toast.success(`${item.title} \n has been added to your cart.`)
+                                        }
+                                    }}
                                 >Add to Cart</button>
                                 <button className="bg-red-500 text-white px-4 py-2 rounded-lg"
-                                    onClick={() => setWishlist(item)}
+                                    onClick={() => {
+                                        setWishlist(item);
+                                        toast.error(`${item.title} \n has been removed from your wishlist.`)
+                                    }}
                                 >Remove</button>
                             </div>
                             <div className="p-2 text-center">
