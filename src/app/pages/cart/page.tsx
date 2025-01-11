@@ -26,11 +26,11 @@ const Cart = () => {
                 <div className="flex space-x-5 pr-5">
                     <Link href="/" className="flex items-center space-x-1 text-black">
                         <House/>
-                        <h1 className="font-semibold">HOME</h1>
+                        <h1 className="font-semibold">H O M E</h1>
                     </Link>
                     <Link href="/pages/wishlist" className="flex items-center space-x-1 text-black">
                         <Heart/>
-                        <h1 className="font-semibold">WISHLIST</h1>
+                        <h1 className="font-semibold">W I S H L I S T</h1>
                     </Link>
                 </div>
             </div>
